@@ -12,11 +12,13 @@ namespace Enemies.States {
 
             protected Enemy parent;
             protected StateController nextState;
-            stateStage stage;
+            protected stateStage stage;
+            protected currentState stateNow;
 
-            public StateController(Enemy parent) {
+            protected StateController(Enemy parent) {
                 this.parent = parent;                
                 stage = stateStage.enter;
+                
             }
 
             protected virtual void Enter() {

@@ -14,24 +14,25 @@ public abstract class Enemy : MonoBehaviour {
     enum stateStages {
         start, normal, exit
     }
-    private static GameObject player;
-    
-    [SerializeField] protected EnemyStats stats;
-    private Vector3 startingPos;
+    public static GameObject player { get; private set; }
+    [SerializeField] GameObject p;
+    [SerializeField] public EnemyStats stats;
+    public Vector3 startingPos { get; protected set; }
     public NavMeshAgent agent { get; private set; }
-    private StateController stateController;
-    
-    //player
-    protected void Start() {
+    protected StateController state;
+    protected virtual void Start() {
+        startingPos = transform.position;
+        player = p;
         agent = GetComponent<NavMeshAgent>();
-        stateController = new StateController(this);
+        state = new IdleState(this);
         StartCoroutine(Process());
     }
     
     IEnumerator Process() {
         WaitForSeconds waitTime = new WaitForSeconds(0.50f);
         while (true) {
-            stateController.Process();
+            state = state.Process();
+            Debug.Log(state);
             yield return waitTime;
         }
     }
@@ -43,12 +44,6 @@ public abstract class Enemy : MonoBehaviour {
         Destroy(this);
     }
     
-    public virtual bool Idle() {
-        if (transform.CalculateDistance(player.transform) < stats.SeeRange) {
-            return true;
-        }
-        return false;
-    }
     public abstract void Attack();
     public abstract void Reload();
     public abstract void Pursue();
