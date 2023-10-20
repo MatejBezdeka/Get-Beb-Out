@@ -15,6 +15,7 @@ namespace Enemies.States {
             float distanceToSpawn = parent.transform.CalculateDistance(parent.startingPos);
             if (distance <= parent.stats.AttackRange) {
                 nextState = new ReloadState(parent, true);
+                parent.agent.SetDestination(parent.transform.position);
                 stage = stateStage.exit;
                 return;
             }
