@@ -7,5 +7,9 @@ namespace skripts.Enemies {
             return (float) Math.Sqrt(Math.Pow(objectA.position.x - objectB.position.x, 2) +
                                      Math.Pow(objectA.position.y - objectB.position.y, 2));
         }
+
+        public static bool PlayerInRange(this Transform enemy, Transform player, float range) {
+            return enemy.CalculateDistance(player.transform) < range;
+        }
     }
 }
