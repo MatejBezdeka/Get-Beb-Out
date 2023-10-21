@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager manager;
     [SerializeField] private List<GameObject> enemyList;
     [SerializeField] private pohyb player;
+    //[SerializeField] private Beb beb;
+    //public Beb Beb => BEb; 
     public pohyb Player => player;
     public List<SpawnPoint> spawns;
     

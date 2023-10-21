@@ -9,6 +9,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Enemy : MonoBehaviour {
     [SerializeField] public EnemyStats stats;
+    public event Action<GameObject> died;
     public Vector3 startingPos { get; protected set; }
     public NavMeshAgent agent { get; private set; }
     protected StateController state;
@@ -34,6 +35,7 @@ public abstract class Enemy : MonoBehaviour {
         }
     }
     void Die() {
+        died?.Invoke(gameObject);
         StopCoroutine(Process());
         Destroy(this);
     }
