@@ -1,10 +1,13 @@
-﻿namespace Enemies.States {
+﻿using UnityEngine;
+
+namespace Enemies.States {
     public class AttackState : StateController {
         public AttackState(Enemy parent) : base(parent) {
             stateNow = currentState.attack;
         }
 
         protected override void Enter() {
+            parent.agent.isStopped = true;
             base.Enter();
         }
 
@@ -15,6 +18,7 @@
         }
 
         protected override void Exit() {
+            parent.agent.isStopped = false;
             base.Exit();
         }
     }

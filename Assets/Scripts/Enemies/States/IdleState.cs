@@ -5,12 +5,9 @@ namespace Enemies.States {
     public class IdleState : StateController{
         public IdleState(Enemy parent) : base(parent) {
             stateNow = currentState.idle;
-            parent.agent.isStopped = false;
-
-            base.Enter();
         }
         protected override void Enter() {
-            
+            parent.agent.isStopped = true;
             base.Enter();
         }
 
@@ -22,6 +19,7 @@ namespace Enemies.States {
         }
 
         protected override void Exit() {
+            parent.agent.isStopped = false;
             base.Exit();
         }
     }

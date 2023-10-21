@@ -8,12 +8,6 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Enemy : MonoBehaviour {
-    enum states {
-        attack, idle, pursue, reload, retreat
-    }
-    enum stateStages {
-        start, normal, exit
-    }
     public static GameObject player { get; private set; }
     [SerializeField] GameObject p;
     [SerializeField] public EnemyStats stats;
@@ -22,6 +16,7 @@ public abstract class Enemy : MonoBehaviour {
     protected StateController state;
     protected virtual void Start() {
         startingPos = transform.position;
+        stats.Start();
         player = p;
         agent = GetComponent<NavMeshAgent>();
         state = new IdleState(this);
@@ -29,7 +24,7 @@ public abstract class Enemy : MonoBehaviour {
     }
     
     IEnumerator Process() {
-        WaitForSeconds waitTime = new WaitForSeconds(0.50f);
+        WaitForSeconds waitTime = new WaitForSeconds(0.10f);
         while (true) {
             state = state.Process();
             Debug.Log(state);
@@ -37,16 +32,15 @@ public abstract class Enemy : MonoBehaviour {
         }
     }
     public void Hit(int damage) {
-        
+        if (stats.GetHit(damage)) {
+            Die();
+        }
     }
-    public void Die() {
+    void Die() {
         StopCoroutine(Process());
         Destroy(this);
     }
     
     public abstract void Attack();
-    public abstract void Reload();
-    public abstract void Pursue();
-    public abstract void Retreat();
 
 }
