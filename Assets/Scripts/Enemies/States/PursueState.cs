@@ -11,7 +11,7 @@ namespace Enemies.States {
         }
 
         protected override void Update() {
-            float distance = parent.transform.CalculateDistance(Enemy.player.transform);
+            float distance = parent.transform.CalculateDistance(GameManager.manager.Player.transform);
             float distanceToSpawn = parent.transform.CalculateDistance(parent.startingPos);
             if (distance <= parent.stats.AttackRange) {
                 nextState = new ReloadState(parent, true);
@@ -24,7 +24,7 @@ namespace Enemies.States {
                 stage = stateStage.exit;
                 return;
             }
-            parent.agent.SetDestination(Enemy.player.transform.position);
+            parent.agent.SetDestination(GameManager.manager.Player.transform.position);
         }
 
         protected override void Exit() {

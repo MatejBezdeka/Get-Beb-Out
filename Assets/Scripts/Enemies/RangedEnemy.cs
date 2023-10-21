@@ -5,7 +5,7 @@ namespace Enemies.States {
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private GameObject muzzle;
     public override void Attack() {
-        Projectile.MakeProjectile(stats.Damage, stats.Accuracy, 4, player.transform.position, projectilePrefab, muzzle, true);
+        Projectile.MakeProjectile(stats.Damage, stats.Accuracy, 4, GameManager.manager.Player.transform.position, projectilePrefab, muzzle, true);
     }
     }
 }

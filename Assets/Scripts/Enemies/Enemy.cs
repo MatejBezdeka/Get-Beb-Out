@@ -8,8 +8,6 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Enemy : MonoBehaviour {
-    public static GameObject player { get; private set; }
-    [SerializeField] GameObject p;
     [SerializeField] public EnemyStats stats;
     public Vector3 startingPos { get; protected set; }
     public NavMeshAgent agent { get; private set; }
@@ -17,7 +15,6 @@ public abstract class Enemy : MonoBehaviour {
     protected virtual void Start() {
         startingPos = transform.position;
         stats.Start();
-        player = p;
         agent = GetComponent<NavMeshAgent>();
         state = new IdleState(this);
         StartCoroutine(Process());

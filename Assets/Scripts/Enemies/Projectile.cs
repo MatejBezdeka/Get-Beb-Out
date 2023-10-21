@@ -14,8 +14,6 @@ public class Projectile : MonoBehaviour {
     private float speed = 5;
     private float maxLifeTime = 5;
     private float currentTime = 0;
-    protected Rigidbody body;
-    protected Vector3 destinationPos;
     protected GameObject self;
 
     public static void MakeProjectile(int damage, float spread, float speed, Vector3 destinationPos, GameObject prefab, GameObject muzzle, bool lobed) {
@@ -25,9 +23,7 @@ public class Projectile : MonoBehaviour {
         
         projectileComp.damage = damage;
         projectileComp.speed = speed;
-        projectileComp.destinationPos = destinationPos;
         destinationPos.y += 0.5f;
-        Debug.DrawLine(destinationPos , new Vector3(0,1,0), Color.black, 1000);
         projectile.transform.LookAt(destinationPos);
         //rozptyl
         var rigid = projectile.GetComponent<Rigidbody>();
@@ -39,7 +35,6 @@ public class Projectile : MonoBehaviour {
     }
     
     protected void Start() {
-        body = GetComponent<Rigidbody>();
     }
 
     protected virtual void Update() {

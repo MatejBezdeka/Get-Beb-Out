@@ -12,7 +12,7 @@ namespace Enemies.States {
         }
 
         protected override void Update(){
-            if (parent.transform.CalculateDistance(Enemy.player.transform) < parent.stats.SeeRange) {
+            if (parent.transform.CalculateDistance(GameManager.manager.Player.transform) < parent.stats.SeeRange) {
                 nextState = new PursueState(parent);
                 stage = stateStage.exit;
             }

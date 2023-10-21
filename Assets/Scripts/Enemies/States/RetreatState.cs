@@ -11,7 +11,7 @@ namespace Enemies.States {
 
         protected override void Update() {
             parent.agent.SetDestination(parent.startingPos);
-            if (parent.transform.CalculateDistance(Enemy.player.transform) <= parent.stats.AttackRange + 3) {
+            if (parent.transform.CalculateDistance(GameManager.manager.Player.transform) <= parent.stats.AttackRange + 3) {
                 nextState = new PursueState(parent);
                 stage = stateStage.exit;
                 return;
