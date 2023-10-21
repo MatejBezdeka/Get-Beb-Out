@@ -28,9 +28,11 @@ public class Projectile : MonoBehaviour {
         //rozptyl
         var rigid = projectile.GetComponent<Rigidbody>();
         Vector3 direction = projectile.transform.forward * 9.81f;
+        direction.y = 0.8f;
         //direction += projectile.transform.up;
         direction.x += Random.Range(-spread, spread);
         direction.y += Random.Range(-spread, spread);
+        
         rigid.AddForce(direction * (speed * rigid.mass), ForceMode.Impulse);
     }
     
