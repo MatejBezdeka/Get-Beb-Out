@@ -25,7 +25,6 @@ public abstract class Enemy : MonoBehaviour {
         WaitForSeconds waitTime = new WaitForSeconds(0.10f);
         while (true) {
             state = state.Process();
-            Debug.Log(state);
             yield return waitTime;
         }
     }

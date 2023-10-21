@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour {
     }
 
     void Destroy() {
-        Debug.Log("destroyed");
+        //Debug.Log("destroyed");
         Destroy(self);
     }
 }

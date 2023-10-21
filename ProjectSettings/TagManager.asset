@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Floor
   - SpawnPoint
+  - Crystal
+  - Portal
   layers:
   - Default
   - TransparentFX

@@ -36,7 +36,6 @@ public class pohyb : MonoBehaviour
         //movement
         inputMovement = transform.forward * (movementSpeed * vertical);
         inputMovement += transform.right * (movementSpeed * horizontal);
-        Debug.Log(inputMovement.normalized);
         model.transform.rotation = Quaternion.LookRotation(inputMovement);
         characterController.Move(inputMovement * Time.deltaTime);
         
