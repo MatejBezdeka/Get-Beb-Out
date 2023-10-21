@@ -198,6 +198,7 @@ MonoBehaviour:
   movementSpeed: 2.5
   rotationSpeed: 3
   gravity: 10
+  model: {fileID: 6358196305071015527}
   runningSound: {fileID: 0}
   fallingScream: {fileID: 0}
 --- !u!1 &6358196305071015527
