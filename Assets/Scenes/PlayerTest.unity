@@ -437,9 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b387174fbf24b45a899e99eee6f633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 2140647184}
   rb: {fileID: 536113527}
-  movementSpeed: 20
+  movementSpeed: 10
   rotationSpeed: 3
   gravity: 10
   runningSound: {fileID: 0}
@@ -651,6 +651,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -2577548232221058511, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -675,6 +679,28 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5392390209365313541, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392390209365313541, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cb9f1557f9236fe4ebcaba00e7e4c81f, type: 2}
+    - target: {fileID: 5866666021909216657, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'metarig'\n\tTransform 'forearm.R'\n\tTransform
+        'shoulder.R'\n\tTransform 'thigh.L'\n\tTransform 'toe.L'\n\tTransform 'upper_arm.L'\n\tTransform
+        'spine.006'\n\tTransform 'shin.R'\n\tTransform 'spine.003'\n\tTransform 'metarig'\n\tand
+        more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'\n\tFrom
+        animation clip 'mixamo.com'"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -683,6 +709,11 @@ PrefabInstance:
 --- !u!4 &2140647183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
+  m_PrefabInstance: {fileID: 2140647182}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2140647184 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ef6b8965c2659f74eb7cd56a435a2062, type: 3}
   m_PrefabInstance: {fileID: 2140647182}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

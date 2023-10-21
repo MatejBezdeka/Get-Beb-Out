@@ -1,5 +1,6 @@
 //Jan Kopejtko, 2022
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class pohyb : MonoBehaviour
@@ -22,8 +23,7 @@ public class pohyb : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.visible = false;
 
-
-        runningSound.Play();
+        //runningSound.Play();
 
     }
     void Update()
@@ -37,6 +37,11 @@ public class pohyb : MonoBehaviour
         characterController.Move(inputMovement * Time.deltaTime);
         transform.Rotate(Vector3.up * Input.GetAxisRaw("Horizontal") * rotationSpeed);
 
+        //hit
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("isHitting");
+        }
 
         //move one frame
         movementDirection.y -= gravity * Time.deltaTime;
@@ -48,30 +53,30 @@ public class pohyb : MonoBehaviour
         animator.SetBool("isIdle", Input.GetAxisRaw("Vertical") == 0);
 
         //sound
-        if (!animator.GetBool("isRunning") && runningSound.isPlaying == true)
-        {
-            runningSound.Stop();
-        }
-        else if (animator.GetBool("isRunning") && runningSound.isPlaying == false)
-        {
-            runningSound.Play();
-        }
+        //if (!animator.GetBool("isRunning") && runningSound.isPlaying == true)
+        //{
+        //    runningSound.Stop();
+        //}
+        //else if (animator.GetBool("isRunning") && runningSound.isPlaying == false)
+        //{
+        //    runningSound.Play();
+        //}
 
         //player died
-        if ((int)rb.position.y == -15f)
-        {
-            if (!fallingScream.isPlaying)
-            {
-                fallingScream.Play();
-            }
-        }
-        if (rb.position.y <= -15f)
-        {
-            if (!fallingScream.isPlaying)
-            {
-                //FindObjectOfType<event_manager>().EndGame();
-            }
-        }
+        //if ((int)rb.position.y == -15f)
+        //{
+        //    if (!fallingScream.isPlaying)
+        //    {
+        //        //fallingScream.Play();
+        //    }
+        //}
+        //if (rb.position.y <= -15f)
+        //{
+        //    if (!fallingScream.isPlaying)
+        //    {
+        //        FindObjectOfType<event_manager>().EndGame();
+        //    }
+        //}
     }
 }
 //todo comment code
