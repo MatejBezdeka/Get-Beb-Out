@@ -10,14 +10,18 @@ public class pohyb : MonoBehaviour
     public Rigidbody rb;
 
     [SerializeField] private float movementSpeed, rotationSpeed, gravity;
+    [SerializeField] private GameObject model;
     private Vector3 movementDirection = Vector3.zero;
+    
     private bool playerGrounded;
     private Vector3 inputMovement = Vector3.zero;
 
     //sounds
     public AudioSource runningSound;
     public AudioSource fallingScream;
-
+    
+    float vertical;
+    float horizontal;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -27,14 +31,15 @@ public class pohyb : MonoBehaviour
     void Update()
     {
         playerGrounded = characterController.isGrounded;
+        vertical = Input.GetAxisRaw("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal");
         //movement
-        if (playerGrounded)
-        {
-            inputMovement = transform.forward * movementSpeed * Input.GetAxisRaw("Vertical");
-        }
+        inputMovement = transform.forward * (movementSpeed * vertical);
+        inputMovement += transform.right * (movementSpeed * horizontal);
+        Debug.Log(inputMovement.normalized);
+        model.transform.rotation = Quaternion.LookRotation(inputMovement);
         characterController.Move(inputMovement * Time.deltaTime);
-        transform.Rotate(Vector3.up * Input.GetAxisRaw("Horizontal") * rotationSpeed);
-
+        
         //hit
         if (Input.GetMouseButtonDown(0))
         {
@@ -46,9 +51,9 @@ public class pohyb : MonoBehaviour
         characterController.Move(movementDirection * Time.deltaTime);
 
         //animations
-        animator.SetBool("isRunning", Input.GetAxisRaw("Vertical") > 0);
-        animator.SetBool("isBackRunning", Input.GetAxisRaw("Vertical") < 0);
-        animator.SetBool("isIdle", Input.GetAxisRaw("Vertical") == 0);
+        animator.SetBool("isRunning", vertical != 0 || horizontal != 0); //vertical > 0 || horizontal > 0
+        //animator.SetBool("isBackRunning", vertical < 0 || horizontal < 0);
+        animator.SetBool("isIdle", vertical == 0 && horizontal == 0);
 
         //sound
         //if (!animator.GetBool("isRunning") && runningSound.isPlaying == true)
