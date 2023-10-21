@@ -21,8 +21,6 @@ public class pohyb : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.visible = false;
-
         //runningSound.Play();
 
     }
