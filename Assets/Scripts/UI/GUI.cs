@@ -7,11 +7,8 @@ using UnityEngine.UI;
 public class GUI : MonoBehaviour
 {
     [Header("Stats")]
-    public float bebHealth;
-    public float currentBebHealth;
-    public float carryCapacity;
-    public float crystalCount;
-    public float stoneCount;
+    public pohyb Pohyb;
+    public BebControll bebControl;
 
     [Header("UI Elements")] 
     [SerializeField] private Slider hpBar;
@@ -27,21 +24,23 @@ public class GUI : MonoBehaviour
         UpdateStoneCountUI();
     }
 
-    public void UpdateBebHealthUI()
+    public void UpdateBebHealthUI() //volat - beb takes damage or heals
     {
-        hpBar.value = currentBebHealth;
+        hpBar.value = bebControl.currentBebHealth;
+        hpBar.maxValue = bebControl.maxBebHealth;
     }
-    public void UpdateCrystalCountUI()
+    public void UpdateCrystalCountUI() //volat - sebere crystal nebo neco koupi
     {
-        crystalBar.value = crystalCount;
-        crystalCountText.text = crystalCount.ToString();
+        crystalBar.value = bebControl.crystalCount;
+        crystalCountText.text = bebControl.crystalCount.ToString();
+        crystalBar.maxValue = bebControl.carryCapacity;
     }
 
-    public void UpdateStoneCountUI() {
-        stoneBar.value = stoneCount;
-        if(stoneCount < 5)
+    public void UpdateStoneCountUI() { //volat - sebere main quest kamen
+        stoneBar.value = Pohyb.stoneCount;
+        if(Pohyb.stoneCount < 5)
         {
-            stoneCountText.text = "Portal Stones: " + stoneCount.ToString() + "/5";
+            stoneCountText.text = "Portal Stones: " + Pohyb.stoneCount.ToString() + "/5";
         }else
         {
             stoneCountText.text = "Go repair the Portal!";

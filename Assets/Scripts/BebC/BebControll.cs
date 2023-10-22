@@ -22,8 +22,14 @@ public class BebControll : MonoBehaviour {
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         states = new IdleBeb(this, GameManager.manager.Player);
-        
     }
+
+    public float carryCapacity;
+    public float crystalCount;
+    public float maxBebHealth;
+    public float currentBebHealth;
+    public float bebSpeed;    //nasobitel movement speedu
+    public float miningSpeed; //nasobitel mining speedu
 
 
     private void Update() {

@@ -24,13 +24,16 @@ public class pohyb : MonoBehaviour
     
     float vertical;
     float horizontal;
-    private int hp;
-    private int maxHp;
-    private int damage;
-    private float attackSpeed;
-    private float hpRegen;
+    public float hp;
+    public float maxHp;
+    public float damageModifier; // nasobitel dmg
+    public float attackSpeedModifier; //nasobitel attack speedu
+    private float hpRegen = 5;
+    public float hpRegenModifier; //nasobitel regenu
+    public float movementSpeedModifier; //nasobitel movement speedu
     private float currentHeal = 0;
-    private int carryCapacity;
+    public float stoneCount = 0;
+    
     
 
     void Start()
@@ -57,10 +60,10 @@ public class pohyb : MonoBehaviour
     }
 
     void RegenHealth() {
-        currentHeal += hpRegen;
-        if (hpRegen >= 1) {
-            hp += (int) hpRegen;
-            hpRegen -= (int) hpRegen;
+        currentHeal += hpRegen * Time.deltaTime * hpRegenModifier;
+        if (currentHeal >= 1) {
+            hp += (int)currentHeal;
+            currentHeal -= (int)currentHeal;
             if (hp > maxHp) {
                 hp = maxHp;
             }

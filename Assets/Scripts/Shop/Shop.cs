@@ -71,16 +71,8 @@ public class Shop : MonoBehaviour
     public TextMeshProUGUI miningspeedCostText;
 
     [Header("Player and Beb stats")]
-    public float crystalCount;
-    public float damageModifier;
-    public float health;
-    public float attackspeedModifier;
-    public float movementspeedModifier;
-    public float healthregenModifier;
-    public float carrycapacity;
-    public float bebhealth;
-    public float bebmovementspeedModifier;
-    public float miningspeedModifier;
+    public pohyb Pohyb;
+    public BebControll bebControl;
 
     [Header("Player and Beb stats Texts")]
     public TextMeshProUGUI crystalCountText;
@@ -147,22 +139,22 @@ public class Shop : MonoBehaviour
         miningspeedName.text = "Mining Speed " + (miningspeedCount + 1);
         miningspeedCostText.text = miningspeedCost.ToString();
 
-        crystalCountText.text = crystalCount.ToString();
-        if(carrycapacity != 0)
+        crystalCountText.text = bebControl.crystalCount.ToString();
+        if(bebControl.carryCapacity != 0)
         {
-            crystalFiller.fillAmount = crystalCount / carrycapacity;
+            crystalFiller.fillAmount = bebControl.crystalCount / bebControl.carryCapacity;
         }
 
-        damageModifierText.text = "Damage: " + damageModifier.ToString() + "x";
-        healthText.text = "Health: " + health.ToString();
-        attackspeedModifierText.text = "Attack Speed: " + attackspeedModifier.ToString() + "x";
-        movementspeedModifierText.text = "Movement Speed: " + movementspeedModifier.ToString() + "x";
-        healthregenModifierText.text = "Health Regen: " + healthregenModifier.ToString() + "x";
+        damageModifierText.text = "Damage: " + Pohyb.damageModifier.ToString() + "x";
+        healthText.text = "Health: " + Pohyb.hp.ToString();
+        attackspeedModifierText.text = "Attack Speed: " + Pohyb.attackSpeedModifier.ToString() + "x";
+        movementspeedModifierText.text = "Movement Speed: " + Pohyb.movementSpeedModifier.ToString() + "x";
+        healthregenModifierText.text = "Health Regen: " + Pohyb.hpRegenModifier.ToString() + "x";
 
-        carrycapacityText.text = "Carry Capacity: " + carrycapacity.ToString();
-        bebhealthText.text = "Health: " + bebhealth.ToString();
-        bebmovementspeedModifierText.text = "Movement Speed: " + bebmovementspeedModifier.ToString() + "x";
-        miningspeedModifierText.text = "Mining Speed: " + miningspeedModifier.ToString() + "x";
+        carrycapacityText.text = "Carry Capacity: " + bebControl.carryCapacity.ToString();
+        bebhealthText.text = "Health: " + bebControl.maxBebHealth.ToString();
+        bebmovementspeedModifierText.text = "Movement Speed: " + bebControl.bebSpeed.ToString() + "x";
+        miningspeedModifierText.text = "Mining Speed: " + bebControl.miningSpeed.ToString() + "x";
     }
     void EnableShop()
     {
@@ -171,10 +163,10 @@ public class Shop : MonoBehaviour
     }
     void DamageClick()
     {
-        if(dmgCost <= crystalCount)
+        if(dmgCost <= bebControl.crystalCount)
         {
-            crystalCount -= dmgCost;
-            damageModifier += 0.2f;
+            bebControl.crystalCount -= dmgCost;
+            Pohyb.damageModifier += 0.2f;
             dmgCost += 50f;
             dmgCount++;
             UpdateShopUI();
@@ -182,10 +174,10 @@ public class Shop : MonoBehaviour
     }
     void HealthClick()
     {
-        if (healthCost <= crystalCount)
+        if (healthCost <= bebControl.crystalCount)
         {
-            crystalCount -= healthCost;
-            health += 25f;
+            bebControl.crystalCount -= healthCost;
+            Pohyb.hp += 25f;
             healthCost += 50f;
             healthCount++;
             UpdateShopUI();
@@ -193,10 +185,10 @@ public class Shop : MonoBehaviour
     }
     void AttackSpeedClick()
     {
-        if (attackspeedCost <= crystalCount)
+        if (attackspeedCost <= bebControl.crystalCount)
         {
-            crystalCount -= attackspeedCost;
-            attackspeedModifier += 0.2f;
+            bebControl.crystalCount -= attackspeedCost;
+            Pohyb.attackSpeedModifier += 0.2f;
             attackspeedCost += 50f;
             attackspeedCount++;
             UpdateShopUI();
@@ -204,10 +196,10 @@ public class Shop : MonoBehaviour
     }
     void MovementSpeedClick()
     {
-        if (movementspeedCost <= crystalCount)
+        if (movementspeedCost <= bebControl.crystalCount)
         {
-            crystalCount -= movementspeedCost;
-            movementspeedModifier += 0.2f;
+            bebControl.crystalCount -= movementspeedCost;
+            Pohyb.movementSpeedModifier += 0.2f;
             movementspeedCost += 50f;
             movementspeedCount++;
             UpdateShopUI();
@@ -215,10 +207,10 @@ public class Shop : MonoBehaviour
     }
     void HealthRegenClick()
     {
-        if (healthregenCost <= crystalCount)
+        if (healthregenCost <= bebControl.crystalCount)
         {
-            crystalCount -= healthregenCost;
-            healthregenModifier += 0.2f;
+            bebControl.crystalCount -= healthregenCost;
+            Pohyb.hpRegenModifier += 0.2f;
             healthregenCost += 50f;
             healthregenCount++;
             UpdateShopUI();
@@ -226,10 +218,10 @@ public class Shop : MonoBehaviour
     }
     void CarryCapacityClick()
     {
-        if (carrycapacityCost <= crystalCount)
+        if (carrycapacityCost <= bebControl.crystalCount)
         {
-            crystalCount -= carrycapacityCost;
-            carrycapacity += 100f;
+            bebControl.crystalCount -= carrycapacityCost;
+            bebControl.carryCapacity += 100f;
             carrycapacityCost += 50f;
             carrycapacityCount++;
             UpdateShopUI();
@@ -237,10 +229,10 @@ public class Shop : MonoBehaviour
     }
     void BebHealthClick()
     {
-        if (bebhealthCost <= crystalCount)
+        if (bebhealthCost <= bebControl.crystalCount)
         {
-            crystalCount -= bebhealthCost;
-            bebhealth += 50f;
+            bebControl.crystalCount -= bebhealthCost;
+            bebControl.maxBebHealth += 50f;
             bebhealthCost += 50f;
             bebhealthCount++;
             UpdateShopUI();
@@ -248,10 +240,10 @@ public class Shop : MonoBehaviour
     }
     void BebMovementSpeedClick()
     {
-        if (bebmovementspeedCost <= crystalCount)
+        if (bebmovementspeedCost <= bebControl.crystalCount)
         {
-            crystalCount -= bebmovementspeedCost;
-            bebmovementspeedModifier += 0.2f;
+            bebControl.crystalCount -= bebmovementspeedCost;
+            bebControl.bebSpeed += 0.2f;
             bebmovementspeedCost += 50f;
             bebmovementspeedCount++;
             UpdateShopUI();
@@ -259,10 +251,10 @@ public class Shop : MonoBehaviour
     }
     void MiningSpeedClick()
     {
-        if (miningspeedCost <= crystalCount)
+        if (miningspeedCost <= bebControl.crystalCount)
         {
-            crystalCount -= miningspeedCost;
-            miningspeedModifier += 0.2f;
+            bebControl.crystalCount -= miningspeedCost;
+            bebControl.miningSpeed += 0.2f;
             miningspeedCost += 50f;
             miningspeedCount++;
             UpdateShopUI();
