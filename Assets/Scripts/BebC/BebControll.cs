@@ -18,7 +18,7 @@ public class BebControll : MonoBehaviour {
     [SerializeField] private Camera mainCam;
     public Animator animator;
     public NavMeshAgent agent;
-    BebStatesController states;
+    public BebStatesController states;
     private RaycastHit hit;
     private int next;
     private void Start() {

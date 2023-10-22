@@ -34,6 +34,7 @@ namespace Beb.States {
                 if (currentMineTime >= beb.mineTime) {
                     beb.animator.SetBool("isMining", false);
                     beb.animator.SetBool("isWalking", false);
+                    beb.states.ChangeState(new FollowState(beb, GameManager.manager.Player));
                     Object.Destroy(crystal);
                 }
             }
