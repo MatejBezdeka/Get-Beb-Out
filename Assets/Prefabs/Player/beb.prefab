@@ -523,7 +523,10 @@ MonoBehaviour:
   mineTime: 5
   speed: 2.21
   mainCam: {fileID: 0}
+  animator: {fileID: 6340831103039821546}
   agent: {fileID: 469195908685987105}
+  MineCursor: {fileID: 0}
+  DefaultCursor: {fileID: 0}
   carryCapacity: 0
   crystalCount: 0
   maxBebHealth: 10
