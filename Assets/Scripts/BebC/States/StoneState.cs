@@ -54,6 +54,8 @@ namespace Beb.States
         }
         protected override void Exit()
         {
+            player.stoneCount++;
+            GameManager.manager.normalGUIScript.UpdateStoneCountUI();
             base.Exit();
         }
     }

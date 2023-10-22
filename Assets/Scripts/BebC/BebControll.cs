@@ -67,7 +67,7 @@ public class BebControll : MonoBehaviour {
                 case "Crystal":
                     next = 3;
                     Debug.Log("crystal");
-                    Cursor.SetCursor(MineCursor, Vector2.zero, CursorMode.Auto);
+                    
                     break;
                 case "Portal":
                     Debug.Log("po");

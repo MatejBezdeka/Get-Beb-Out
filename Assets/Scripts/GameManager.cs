@@ -9,13 +9,14 @@ public class GameManager : MonoBehaviour {
     public static GameManager manager;
     [SerializeField] private List<GameObject> enemyList;
     [SerializeField] private pohyb player;
-    //[SerializeField] private Beb beb;
+    [SerializeField] private BebControll beb;
     //public Beb Beb => BEb; 
     public pohyb Player => player;
     public List<SpawnPoint> spawns;
     [SerializeField] private Canvas normalGUI;
     [SerializeField] private Canvas shop;
     [SerializeField] private Canvas deathScreen;
+    [SerializeField] public GUI normalGUIScript;
     
 
     void Awake() {
@@ -40,4 +41,6 @@ public class GameManager : MonoBehaviour {
     public GameObject GetRandomEnemy() {
         return enemyList[Random.Range(0,enemyList.Count)];
     }
+
+    
 }

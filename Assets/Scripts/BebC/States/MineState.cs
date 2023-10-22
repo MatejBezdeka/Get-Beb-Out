@@ -45,6 +45,8 @@ namespace Beb.States {
             yield return waitForSeconds;
         }
         protected override void Exit() {
+            beb.crystalCount += 50;
+            GameManager.manager.normalGUIScript.UpdateCrystalCountUI();
             base.Exit();
         }
     }
