@@ -9,13 +9,13 @@ namespace Beb.States
     {
         private Vector3 destination;
         private bool phaseOne = true;
-        private GameObject crystal;
+        private GameObject stone;
         private float currentMineTime = 0;
-        public StoneState(BebControll beb, pohyb player, Vector3 destination, GameObject crystal) : base(beb, player)
+        public StoneState(BebControll beb, pohyb player, Vector3 destination, GameObject stone) : base(beb, player)
         {
             currentState = States.mine;
             this.destination = destination;
-            this.crystal = crystal;
+            this.stone = stone;
         }
         protected override void Enter()
         {
@@ -31,6 +31,8 @@ namespace Beb.States
                 if (beb.agent.remainingDistance < 0.5f)
                 {
                     phaseOne = false;
+                    beb.animator.SetBool("isWalking", false);
+                    beb.animator.SetBool("isMining", true);
                 }
             }
             else
@@ -38,7 +40,9 @@ namespace Beb.States
                 currentMineTime += Time.deltaTime;
                 if (currentMineTime >= beb.mineTime)
                 {
-                    Object.Destroy(crystal);
+                    beb.animator.SetBool("isMining", false);
+                    beb.animator.SetBool("isWalking", false);
+                    Object.Destroy(stone);
                 }
             }
         }

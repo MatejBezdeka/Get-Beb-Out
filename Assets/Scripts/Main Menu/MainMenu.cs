@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
@@ -12,8 +13,9 @@ public class MainMenu : MonoBehaviour
     {
         playBtn.onClick.AddListener(PlayButton);
     }
-    void PlayButton()
-    {
+    void PlayButton() {
+        SceneManager.LoadScene("Scenes/MapScene");
+        
         //switch to next scene
     }
     void ExitButton()
