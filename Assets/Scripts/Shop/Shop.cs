@@ -113,8 +113,10 @@ public class Shop : MonoBehaviour
     }
     void BackbuttonClick()
     {
+        Debug.Log("clicked");
         shopCanvas.enabled = false;
         guiCanvas.enabled = true;
+        Time.timeScale = 1;
     }
     void UpdateShopUI()
     {

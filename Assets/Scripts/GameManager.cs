@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour {
     //public Beb Beb => BEb; 
     public pohyb Player => player;
     public List<SpawnPoint> spawns;
+    [SerializeField] private Canvas normalGUI;
+    [SerializeField] private Canvas shop;
+    [SerializeField] private Canvas deathScreen;
     
 
     void Awake() {
@@ -28,8 +31,11 @@ public class GameManager : MonoBehaviour {
             spawnPoint.SpawnEnemy(GetRandomEnemy());
         }
     }
-    
-    
+
+    public void OpenShop() {
+        shop.enabled = true;
+        Time.timeScale = 0;
+    }
 
     public GameObject GetRandomEnemy() {
         return enemyList[Random.Range(0,enemyList.Count)];

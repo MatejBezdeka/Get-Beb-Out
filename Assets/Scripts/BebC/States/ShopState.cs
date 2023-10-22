@@ -15,6 +15,8 @@ namespace Beb.States {
 
         protected override void Update(){
             if (beb.agent.remainingDistance < 1.5f) {
+                Debug.Log("shop");
+                GameManager.manager.OpenShop();
                 nextState = new IdleBeb(beb, player);
                 stage = Stage.exit;
             }

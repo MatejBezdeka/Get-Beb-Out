@@ -44,6 +44,8 @@ public class BebControll : MonoBehaviour {
                     //mine cursor
                     break;
                 case "Portal":
+                    Debug.Log("po");
+
                     next = 4;
                     break;
                 default:
@@ -62,6 +64,7 @@ public class BebControll : MonoBehaviour {
                         states.ChangeState(new MineState(this, GameManager.manager.Player, hit.point,hit.transform.gameObject));
                         break;
                     case 4:
+                        Debug.Log("portal");
                         states.ChangeState(new ShopState(this, GameManager.manager.Player, hit.point));
                         break;
                 }

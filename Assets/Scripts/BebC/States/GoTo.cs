@@ -9,7 +9,6 @@ namespace Beb.States {
             this.destination = destination;
         }
         protected override void Enter() {
-            Debug.Log(destination);
             beb.agent.isStopped = false;
             beb.agent.SetDestination(destination);
             base.Enter();

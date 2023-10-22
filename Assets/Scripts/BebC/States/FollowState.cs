@@ -7,7 +7,6 @@ namespace Beb.States {
         }
         protected override void Enter() {
             beb.agent.isStopped = false;
-            
             base.Enter();
         }
 
