@@ -66,7 +66,7 @@ public class pohyb : MonoBehaviour
     }
 
     void AttackReal() {
-        foreach (var gameObj in Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation)) {
+        foreach (var gameObj in Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.5f), new Vector3(2, 2, 1.5f), transform.rotation)) {
             if (gameObj.gameObject.CompareTag("Enemy")) {
                 Enemy comp = gameObj.gameObject.GetComponent<Enemy>();
                 comp.Hit((int) (damage * damageModifier));
