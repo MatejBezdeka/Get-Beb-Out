@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class pohyb : MonoBehaviour
 {
-    private CharacterController characterController;
     [SerializeField] private Animator animator;
-    public Rigidbody rb;
-
     [SerializeField] private float movementSpeed, rotationSpeed, gravity;
     [SerializeField] private GameObject model;
-    [SerializeField] private Collider HitArea;
+    [SerializeField] private Collider hitArea;
+
     private Vector3 movementDirection = Vector3.zero;
+    private Vector3 lastMovementDirection = Vector3.forward;
+    private Vector3 inputMovement = Vector3.zero;
 
     private bool playerGrounded;
-    private Vector3 inputMovement = Vector3.zero;
+    public Rigidbody rb;
+    private CharacterController characterController;
 
     //sounds
     public AudioSource runningSound;
@@ -23,8 +24,14 @@ public class pohyb : MonoBehaviour
     
     float vertical;
     float horizontal;
-
-    private Vector3 lastMovementDirection = Vector3.forward;
+    private int hp;
+    private int maxHp;
+    private int damage;
+    private float attackSpeed;
+    private float hpRegen;
+    private float currentHeal = 0;
+    private int carryCapacity;
+    
 
     void Start()
     {
@@ -33,6 +40,33 @@ public class pohyb : MonoBehaviour
 
     void Update()
     {
+        Move();
+        RegenHealth();
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+           Attack(); 
+        }
+    }
+
+    void Attack() {
+        animator.SetTrigger("isHitting");
+        //foreach (var VARIABLE in hitArea) {
+            
+        //}
+    }
+
+    void RegenHealth() {
+        currentHeal += hpRegen;
+        if (hpRegen >= 1) {
+            hp += (int) hpRegen;
+            hpRegen -= (int) hpRegen;
+            if (hp > maxHp) {
+                hp = maxHp;
+            }
+        }
+    }
+    void Move() {
         playerGrounded = characterController.isGrounded;
 
         float vertical = Input.GetAxisRaw("Vertical");
@@ -56,17 +90,13 @@ public class pohyb : MonoBehaviour
         // Move the character using the CharacterController
         characterController.Move(inputMovement * Time.deltaTime);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("isHitting");
-        }
+        
 
         movementDirection.y -= gravity * Time.deltaTime;
         characterController.Move(movementDirection * Time.deltaTime);
 
         animator.SetBool("isRunning", vertical != 0 || horizontal != 0);
         animator.SetBool("isIdle", vertical == 0 && horizontal == 0);
-
     }
     //sound
     //if (!animator.GetBool("isRunning") && runningSound.isPlaying == true)
