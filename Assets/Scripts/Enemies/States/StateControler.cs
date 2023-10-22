@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace Enemies.States {
     public class StateController {
-            protected enum currentState {
+            public enum currentState {
                 idle, attack, pursue, reload, retreat
             };
             protected enum stateStage {
@@ -13,7 +13,7 @@ namespace Enemies.States {
             protected Enemy parent;
             protected StateController nextState;
             protected stateStage stage;
-            protected currentState stateNow;
+            public currentState stateNow;
 
             protected StateController(Enemy parent) {
                 this.parent = parent;                

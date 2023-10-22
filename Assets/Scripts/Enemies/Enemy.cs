@@ -12,9 +12,13 @@ public abstract class Enemy : MonoBehaviour {
     public SpawnPoint spawn;
     public int id;
     public Vector3 startingPos { get; protected set; }
-    public NavMeshAgent agent { get; private set; }
+    public NavMeshAgent agent { get; set; }
     protected StateController state;
+    [SerializeField] Animator animator;
     protected virtual void Start() {
+        //agent.angularSpeed = 999;
+        //agent.acceleration = 999;
+        //agent.autoBraking = true;
         startingPos = transform.position;
         hp = stats.MaxHp;
         agent = GetComponent<NavMeshAgent>();
@@ -26,6 +30,18 @@ public abstract class Enemy : MonoBehaviour {
         WaitForSeconds waitTime = new WaitForSeconds(0.10f);
         while (true) {
             state = state.Process();
+            switch (state.stateNow)
+            {
+                case StateController.currentState.idle:
+                    animator.SetBool("isIdle", true);
+                    break;
+                case StateController.currentState.attack:
+                    animator.SetTrigger("hit");
+                    break;
+                case StateController.currentState.pursue:
+                    animator.SetBool("isRunning", true);
+                    break;
+            }
             yield return waitTime;
         }
     }
@@ -37,6 +53,7 @@ public abstract class Enemy : MonoBehaviour {
     void Die() {
         spawn.EnemyDied(this);
         StopCoroutine(Process());
+        animator.SetTrigger("die");
         Destroy(gameObject);
     }
     
