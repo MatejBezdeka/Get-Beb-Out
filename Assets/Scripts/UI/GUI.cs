@@ -13,10 +13,10 @@ public class GUI : MonoBehaviour
     public float crystalCount;
     public float stoneCount;
 
-    [Header("UI Elements")]
-    public Image bebHealthFiller;
-    public Image crystalFiller;
-    public Image stoneFiller;
+    [Header("UI Elements")] 
+    [SerializeField] private Slider hpBar;
+    [SerializeField] private Slider crystalBar;
+    [SerializeField] private Slider stoneBar;
     public TextMeshProUGUI crystalCountText;
     public TextMeshProUGUI stoneCountText;
     
@@ -29,16 +29,16 @@ public class GUI : MonoBehaviour
 
     public void UpdateBebHealthUI()
     {
-        bebHealthFiller.fillAmount = currentBebHealth;
+        hpBar.value = currentBebHealth;
     }
     public void UpdateCrystalCountUI()
     {
-        crystalFiller.fillAmount = crystalCount / carryCapacity;
+        crystalBar.value = crystalCount;
         crystalCountText.text = crystalCount.ToString();
     }
 
-    public void UpdateStoneCountUI()
-    {
+    public void UpdateStoneCountUI() {
+        stoneBar.value = stoneCount;
         if(stoneCount < 5)
         {
             stoneCountText.text = "Portal Stones: " + stoneCount.ToString() + "/5";

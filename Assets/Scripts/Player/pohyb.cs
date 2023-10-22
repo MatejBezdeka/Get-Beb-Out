@@ -11,8 +11,9 @@ public class pohyb : MonoBehaviour
 
     [SerializeField] private float movementSpeed, rotationSpeed, gravity;
     [SerializeField] private GameObject model;
+    [SerializeField] private Collider HitArea;
     private Vector3 movementDirection = Vector3.zero;
-    
+
     private bool playerGrounded;
     private Vector3 inputMovement = Vector3.zero;
 
