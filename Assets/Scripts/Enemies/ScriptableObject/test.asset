@@ -16,7 +16,7 @@ MonoBehaviour:
   damage: 0
   timeBetweenAttacks: 0
   speed: 0
-  attackRange: 2
+  attackRange: 0.7
   accuracy: 0.015
   engageRange: 37.3
   seeRange: 32

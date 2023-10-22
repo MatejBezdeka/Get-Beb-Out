@@ -33,10 +33,11 @@ public abstract class Enemy : MonoBehaviour {
             switch (state.stateNow)
             {
                 case StateController.currentState.idle:
+                    animator.SetBool("isRunning", false);
                     animator.SetBool("isIdle", true);
                     break;
                 case StateController.currentState.attack:
-                    animator.SetBool("isRunning", false);
+                    //animator.SetBool("isRunning", false);
                     animator.SetTrigger("hit");
                     break;
                 case StateController.currentState.pursue:
