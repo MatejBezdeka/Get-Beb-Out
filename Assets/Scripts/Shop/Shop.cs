@@ -35,7 +35,6 @@ public class Shop : MonoBehaviour
     public Canvas shopCanvas;
     public Canvas guiCanvas;
     public Image crystalFiller;
-    //public Button shopbtn;
     
     private int dmgCount = 0;
     private int healthCount = 0;
@@ -88,9 +87,9 @@ public class Shop : MonoBehaviour
 
     void Start()
     {
-        //guiCanvas.enabled = false;
+        guiCanvas.enabled = false;
         backbtn.onClick.AddListener(BackbuttonClick);
-        //shopbtn.onClick.AddListener(EnableShop);
+
         dmgbtn.onClick.AddListener(DamageClick);
         healthbtn.onClick.AddListener(HealthClick);
         attackspeedbtn.onClick.AddListener(AttackSpeedClick);
@@ -106,9 +105,9 @@ public class Shop : MonoBehaviour
     void BackbuttonClick()
     {
         Debug.Log("clicked");
-        shopCanvas.enabled = false;
         guiCanvas.enabled = true;
         Time.timeScale = 1;
+        shopCanvas.enabled = false;
     }
     void UpdateShopUI()
     {
@@ -156,11 +155,8 @@ public class Shop : MonoBehaviour
         bebmovementspeedModifierText.text = "Movement Speed: " + bebControl.bebSpeed.ToString() + "x";
         miningspeedModifierText.text = "Mining Speed: " + bebControl.miningSpeed.ToString() + "x";
     }
-    void EnableShop()
-    {
-        guiCanvas.enabled = false;
-        shopCanvas.enabled = true;
-    }
+   
+    
     void DamageClick()
     {
         if(dmgCost <= bebControl.crystalCount)
