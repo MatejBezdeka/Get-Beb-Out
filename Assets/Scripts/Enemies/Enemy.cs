@@ -56,7 +56,7 @@ public abstract class Enemy : MonoBehaviour {
     }
     void Die() {
         spawn.EnemyDied(this);
-        StopCoroutine(Process());
+        //StopCoroutine(Process());
         animator.SetTrigger("die");
         Destroy(gameObject);
     }

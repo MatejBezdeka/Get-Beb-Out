@@ -43,7 +43,7 @@ public class GUI : MonoBehaviour
             stoneCountText.text = "Portal Stones: " + Pohyb.stoneCount.ToString() + "/5";
         }else
         {
-            stoneCountText.text = "Go repair the Portal!";
+            
         }
     }
 

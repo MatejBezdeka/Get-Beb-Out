@@ -36,6 +36,8 @@ namespace Beb.States {
                     beb.animator.SetBool("isWalking", false);
                     beb.states.ChangeState(new FollowState(beb, GameManager.manager.Player));
                     Object.Destroy(crystal);
+                    nextState = new IdleBeb(beb, player);
+                    stage = Stage.exit;
                 }
             }
         }
