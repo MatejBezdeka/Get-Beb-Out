@@ -1,5 +1,8 @@
 //Jan Kopejtko, 2022
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -17,6 +20,7 @@ public class pohyb : MonoBehaviour
     private bool playerGrounded;
     public Rigidbody rb;
     private CharacterController characterController;
+    private List<GameObject> enemiesInHitArea;
 
     //sounds
     public AudioSource runningSound;
@@ -26,44 +30,66 @@ public class pohyb : MonoBehaviour
     float horizontal;
     public float hp;
     public float maxHp;
-    public float damageModifier; // nasobitel dmg
+    public float damage = 50;
+    public float damageModifier = 1; // nasobitel dmg
     public float attackSpeedModifier; //nasobitel attack speedu
     private float hpRegen = 5;
     public float hpRegenModifier; //nasobitel regenu
     public float movementSpeedModifier; //nasobitel movement speedu
     private float currentHeal = 0;
     public float stoneCount = 0;
-    
-    
+    private float currentAttackCooldown = 0;
+    private float attackCooldown = 2;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        enemiesInHitArea = new List<GameObject>();
     }
 
     void Update()
     {
         Move();
         RegenHealth();
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-           Attack(); 
-        }
+        Attack(); 
     }
 
     void Attack() {
-        animator.SetTrigger("isHitting");
-        //foreach (var VARIABLE in hitArea) {
-            
-        //}
+        currentAttackCooldown += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0)) {
+            if (currentAttackCooldown >= attackCooldown) {
+                animator.SetTrigger("isHitting");
+                Invoke("AttackReal", 0.8f);
+                currentAttackCooldown = 0;
+            }
+        }
     }
 
+    void AttackReal() {
+        foreach (var gameObj in Physics.OverlapBox(transform.position, new Vector3(1, 1, 1), transform.rotation)) {
+            if (gameObj.gameObject.CompareTag("Enemy")) {
+                Enemy comp = gameObj.gameObject.GetComponent<Enemy>();
+                comp.Hit((int) (damage * damageModifier));
+
+            }
+        }
+    }
+
+    /*
+    void OnCollisionEnter(Collision other) {
+        enemiesInHitArea.Add(other.gameObject);
+        Debug.Log(other.transform.name);
+    }
+
+    private void OnCollisionExit(Collision other) {
+        enemiesInHitArea.Remove(other.gameObject);
+    }
+    */
     void RegenHealth() {
-        currentHeal += hpRegen * Time.deltaTime * hpRegenModifier;
-        if (currentHeal >= 1) {
-            hp += (int)currentHeal;
-            currentHeal -= (int)currentHeal;
+        currentHeal += hpRegen;
+        if (hpRegen >= 1) {
+            hp += (int) hpRegen;
+            hpRegen -= (int) hpRegen;
             if (hp > maxHp) {
                 hp = maxHp;
             }

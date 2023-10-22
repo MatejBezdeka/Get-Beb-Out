@@ -245,12 +245,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7281978314474332684}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 831c31e9e54641c8b0fa26ebdf9681da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 3c6e36f96d1807343b6f493631a1f3f1, type: 2}
+  spawn: {fileID: 0}
   attackEffect: {fileID: 8380460629773768769}
 --- !u!1001 &4284854989919386343
 PrefabInstance:

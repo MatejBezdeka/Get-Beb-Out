@@ -18,7 +18,9 @@ namespace Enemies.States {
         }
 
         protected override void Exit() {
-            parent.agent.isStopped = false;
+            if (parent.agent != null) {
+                parent.agent.isStopped = false;
+            }
             base.Exit();
         }
     }

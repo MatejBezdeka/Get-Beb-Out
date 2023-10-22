@@ -1,21 +1,22 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Enemies.States;
-using skripts.Enemies;
 using UnityEngine;
 using UnityEngine.AI;
+using World;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class Enemy : MonoBehaviour {
     [SerializeField] public EnemyStats stats;
-    public event Action<GameObject> died;
+    private int hp;
+    public SpawnPoint spawn;
+    public int id;
     public Vector3 startingPos { get; protected set; }
     public NavMeshAgent agent { get; private set; }
     protected StateController state;
     protected virtual void Start() {
         startingPos = transform.position;
-        stats.Start();
+        hp = stats.MaxHp;
         agent = GetComponent<NavMeshAgent>();
         state = new IdleState(this);
         StartCoroutine(Process());
@@ -29,14 +30,14 @@ public abstract class Enemy : MonoBehaviour {
         }
     }
     public void Hit(int damage) {
-        if (stats.GetHit(damage)) {
+        if ((hp -= damage) <= 0) {
             Die();
         }
     }
     void Die() {
-        died?.Invoke(gameObject);
+        spawn.EnemyDied(this);
         StopCoroutine(Process());
-        Destroy(this);
+        Destroy(gameObject);
     }
     
     public abstract void Attack();
