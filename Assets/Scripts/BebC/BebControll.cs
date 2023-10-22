@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 using MouseButton = UnityEngine.UIElements.MouseButton;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -25,6 +26,9 @@ public class BebControll : MonoBehaviour {
         animator = GetComponent<Animator>();
         states = new IdleBeb(this, GameManager.manager.Player);
     }
+
+    public Texture2D MineCursor;
+    public Texture2D DefaultCursor;
 
     public float carryCapacity;
     public float crystalCount;
@@ -63,15 +67,20 @@ public class BebControll : MonoBehaviour {
                 case "Crystal":
                     next = 3;
                     Debug.Log("crystal");
-                    //mine cursor
+                    Cursor.SetCursor(MineCursor, Vector2.zero, CursorMode.Auto);
                     break;
                 case "Portal":
                     Debug.Log("po");
 
                     next = 4;
                     break;
+                case "Stone":
+                    Debug.Log("stone");
+
+                    next = 5;
+                    break;
                 default:
-                    //normal cursor
+                    Cursor.SetCursor(DefaultCursor, Vector2.zero, CursorMode.Auto);
                     break;
             }
             if (Input.GetMouseButtonDown(1)) {
@@ -88,6 +97,9 @@ public class BebControll : MonoBehaviour {
                     case 4:
                         Debug.Log("portal");
                         states.ChangeState(new ShopState(this, GameManager.manager.Player, hit.point));
+                        break;
+                    case 5:
+                        states.ChangeState(new StoneState(this, GameManager.manager.Player, hit.point, hit.transform.gameObject));
                         break;
                 }
             }
