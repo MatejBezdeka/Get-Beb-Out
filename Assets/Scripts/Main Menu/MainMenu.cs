@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         playBtn.onClick.AddListener(PlayButton);
+        exitBtn.onClick.AddListener(ExitButton);
     }
     void PlayButton() {
         SceneManager.LoadScene("Scenes/MapScene");
