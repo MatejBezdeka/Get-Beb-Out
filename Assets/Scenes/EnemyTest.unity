@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -250,6 +250,9 @@ MonoBehaviour:
   - {fileID: 8714796604012725229, guid: 036ac43882e8d3c44af679e7735eb73c, type: 3}
   player: {fileID: 1768243034}
   spawns: []
+  normalGUI: {fileID: 0}
+  shop: {fileID: 0}
+  deathScreen: {fileID: 0}
 --- !u!4 &222890267
 Transform:
   m_ObjectHideFlags: 0
@@ -729,7 +732,13 @@ MonoBehaviour:
   mineTime: 5
   speed: 2.5
   mainCam: {fileID: 290818119}
-  agent: {fileID: 0}
+  agent: {fileID: 1640453460}
+  carryCapacity: 0
+  crystalCount: 0
+  maxBebHealth: 0
+  currentBebHealth: 0
+  bebSpeed: 10
+  miningSpeed: 2
 --- !u!195 &1640453460
 NavMeshAgent:
   m_ObjectHideFlags: 0

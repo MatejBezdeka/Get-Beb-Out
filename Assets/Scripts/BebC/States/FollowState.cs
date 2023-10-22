@@ -12,10 +12,12 @@ namespace Beb.States {
 
         protected override void Update() {
             if (beb.transform.CalculateDistance(player.transform) > 1) {
+                beb.agent.isStopped = false;
                 beb.agent.SetDestination(player.transform.position);
             }
             else {
-                beb.agent.SetDestination(beb.transform.position);
+                //beb.agent.SetDestination(beb.transform.position);
+                beb.agent.isStopped = true;
             }
         }
 

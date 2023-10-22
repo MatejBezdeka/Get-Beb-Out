@@ -460,6 +460,7 @@ GameObject:
   - component: {fileID: 1128778790295257682}
   - component: {fileID: 469195908685987105}
   - component: {fileID: 3849894361347645355}
+  - component: {fileID: 6340831103039821546}
   m_Layer: 0
   m_Name: beb
   m_TagString: Untagged
@@ -475,7 +476,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8212250373528203874}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99998546, z: -0, w: 0.0053923987}
+  m_LocalRotation: {x: 0, y: 0.9999855, z: 0, w: 0.005393156}
   m_LocalPosition: {x: -1.027, y: 0.016412973, z: -0.8569999}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
@@ -483,7 +484,7 @@ Transform:
   - {fileID: 6818424855346376632}
   - {fileID: 538944403290301000}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180.301, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.382, z: 0}
 --- !u!195 &469195908685987105
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -523,6 +524,33 @@ MonoBehaviour:
   speed: 2.21
   mainCam: {fileID: 0}
   agent: {fileID: 469195908685987105}
+  carryCapacity: 0
+  crystalCount: 0
+  maxBebHealth: 10
+  currentBebHealth: 10
+  bebSpeed: 10
+  miningSpeed: 0
+--- !u!95 &6340831103039821546
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8212250373528203874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: af611acf2ba6b654ba32bedb1f2dab62, type: 3}
+  m_Controller: {fileID: 9100000, guid: 833f5f111922d114cb2570ed5b5201a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8394641508689057833
 GameObject:
   m_ObjectHideFlags: 0

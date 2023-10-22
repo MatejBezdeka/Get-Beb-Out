@@ -15,12 +15,14 @@ public class BebControll : MonoBehaviour {
     [SerializeField, Range(0.1f, 25)] public float mineTime = 5;
     [SerializeField, Range(0.1f, 5f)] public float speed = 2.5f;
     [SerializeField] private Camera mainCam;
+    public Animator animator;
     public NavMeshAgent agent;
     BebStatesController states;
     private RaycastHit hit;
     private int next;
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         states = new IdleBeb(this, GameManager.manager.Player);
     }
 
@@ -33,10 +35,23 @@ public class BebControll : MonoBehaviour {
 
 
     private void Update() {
+        //Debug.Log(agent.isStopped);
+        if (agent.isStopped)
+        {
+            animator.SetBool("isWalking", false);
+        }
+        else
+        {
+            animator.SetBool("isWalking", true);
+        }
         hit = CursorRaycastHit();
         next = 0;
+        agent.angularSpeed = 999;
+        agent.acceleration = 999;
+        agent.autoBraking = true;
         if (hit.transform) {
             switch (hit.transform.tag) {
+
                 case "Floor":
                     next = 1;
                     //go to
@@ -47,6 +62,7 @@ public class BebControll : MonoBehaviour {
                     break;
                 case "Crystal":
                     next = 3;
+                    Debug.Log("crystal");
                     //mine cursor
                     break;
                 case "Portal":

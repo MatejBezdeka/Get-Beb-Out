@@ -22,13 +22,18 @@ namespace Beb.States {
 
         protected override void Update(){
             if (phaseOne) {
-                if (beb.agent.remainingDistance < 0.5f) {
+                if (beb.agent.remainingDistance < 0.5f)
+                {
                     phaseOne = false;
+                    beb.animator.SetBool("isWalking", false);
+                    beb.animator.SetBool("isMining", true);
                 }    
             }
             else {
                 currentMineTime += Time.deltaTime;
                 if (currentMineTime >= beb.mineTime) {
+                    beb.animator.SetBool("isMining", false);
+                    beb.animator.SetBool("isWalking", false);
                     Object.Destroy(crystal);
                 }
             }
