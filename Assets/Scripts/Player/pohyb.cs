@@ -22,63 +22,75 @@ public class pohyb : MonoBehaviour
     
     float vertical;
     float horizontal;
+
+    private Vector3 lastMovementDirection = Vector3.forward;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        //runningSound.Play();
-
     }
+
     void Update()
     {
         playerGrounded = characterController.isGrounded;
-        vertical = Input.GetAxisRaw("Vertical");
-        horizontal = Input.GetAxisRaw("Horizontal");
-        //movement
+
+        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        // Calculate the movement vector based on input
         inputMovement = transform.forward * (movementSpeed * vertical);
         inputMovement += transform.right * (movementSpeed * horizontal);
         model.transform.rotation = Quaternion.LookRotation(inputMovement);
+
+
+        // If there is input, set the last movement direction
+        if (inputMovement != Vector3.zero)
+        {
+            lastMovementDirection = inputMovement.normalized;
+        }
+
+        // Rotate the model to face the last movement direction
+        model.transform.rotation = Quaternion.LookRotation(lastMovementDirection);
+
+        // Move the character using the CharacterController
         characterController.Move(inputMovement * Time.deltaTime);
-        
-        //hit
+
         if (Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("isHitting");
         }
 
-        //move one frame
         movementDirection.y -= gravity * Time.deltaTime;
         characterController.Move(movementDirection * Time.deltaTime);
 
-        //animations
-        animator.SetBool("isRunning", vertical != 0 || horizontal != 0); //vertical > 0 || horizontal > 0
-        //animator.SetBool("isBackRunning", vertical < 0 || horizontal < 0);
+        animator.SetBool("isRunning", vertical != 0 || horizontal != 0);
         animator.SetBool("isIdle", vertical == 0 && horizontal == 0);
 
-        //sound
-        //if (!animator.GetBool("isRunning") && runningSound.isPlaying == true)
-        //{
-        //    runningSound.Stop();
-        //}
-        //else if (animator.GetBool("isRunning") && runningSound.isPlaying == false)
-        //{
-        //    runningSound.Play();
-        //}
-
-        //player died
-        //if ((int)rb.position.y == -15f)
-        //{
-        //    if (!fallingScream.isPlaying)
-        //    {
-        //        //fallingScream.Play();
-        //    }
-        //}
-        //if (rb.position.y <= -15f)
-        //{
-        //    if (!fallingScream.isPlaying)
-        //    {
-        //        FindObjectOfType<event_manager>().EndGame();
-        //    }
-        //}
     }
+    //sound
+    //if (!animator.GetBool("isRunning") && runningSound.isPlaying == true)
+    //{
+    //    runningSound.Stop();
+    //}
+    //else if (animator.GetBool("isRunning") && runningSound.isPlaying == false)
+    //{
+    //    runningSound.Play();
+    //}
+
+    //player died
+    //if ((int)rb.position.y == -15f)
+    //{
+    //    if (!fallingScream.isPlaying)
+    //    {
+    //        //fallingScream.Play();
+    //    }
+    //}
+    //if (rb.position.y <= -15f)
+    //{
+    //    if (!fallingScream.isPlaying)
+    //    {
+    //        FindObjectOfType<event_manager>().EndGame();
+    //    }
+    //}
 }
 //todo comment code
