@@ -18,5 +18,5 @@ MonoBehaviour:
   speed: 3.51
   attackRange: 7.1
   accuracy: 0.029
-  engageRange: 37.1
-  seeRange: 33.7
+  engageRange: 7.1
+  seeRange: 10.3
